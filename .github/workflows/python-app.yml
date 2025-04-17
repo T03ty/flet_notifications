@@ -62,7 +62,7 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip
 
-      - name: Install Python dependencies (in project directory)
+      - name: Install Python dependencies
         working-directory: examples/flet_notifications_example
         run: |
           source ../../.venv/bin/activate
@@ -85,6 +85,7 @@ jobs:
         run: |
           source ../../.venv/bin/activate
           flet build apk \
+            --module-name src.main \
             --android-permissions android.permission.WRITE_EXTERNAL_STORAGE=True \
             android.permission.READ_EXTERNAL_STORAGE=True \
             android.permission.MANAGE_EXTERNAL_STORAGE=True \
