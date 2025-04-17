@@ -62,9 +62,10 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip
 
-      - name: Install Python dependencies
+      - name: Install Python dependencies (in project directory)
+        working-directory: examples/flet_notifications_example
         run: |
-          source .venv/bin/activate
+          source ../../.venv/bin/activate
           pip install flet
           pip install .
           pip list
@@ -80,8 +81,9 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Build APK
+        working-directory: examples/flet_notifications_example
         run: |
-          source .venv/bin/activate
+          source ../../.venv/bin/activate
           flet build apk \
             --android-permissions android.permission.WRITE_EXTERNAL_STORAGE=True \
             android.permission.READ_EXTERNAL_STORAGE=True \
@@ -92,4 +94,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ToolCoin-APK
-          path: build/apk/*.apk
+          path: examples/flet_notifications_example/build/apk/*.apk
